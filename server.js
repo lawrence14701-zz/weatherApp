@@ -6,8 +6,11 @@ const API_KEY = require("./config").apiKey;
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+if (process.env.NODE_ENV === "production") {
+  server.use(express.static("/public"));
+  server.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "index"));
+  });
 }
 
 const params = {
