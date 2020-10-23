@@ -6,6 +6,10 @@ const API_KEY = require("./config").apiKey;
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const params = {
   access_key: API_KEY,
   query: "New York",
